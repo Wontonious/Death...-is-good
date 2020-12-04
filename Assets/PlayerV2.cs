@@ -1,65 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerV2 : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 5f;
-    public float maxSpeed = 20f;
-
-    GroundCheck grounded;
+    public float rotationSpeed = 1f;
     public Rigidbody2D rb;
-    public SpriteRenderer sprite;
-    Vector3 moveDirection;
 
-    // Start is called before the first frame update
-    void Start()
+    private Vector2 moveDirection;
+    private Vector2 mousePos;
+
+    public Camera cam;
+
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        grounded = GetComponent<GroundCheck>();
+        ContactPoint2D contact = collision.contacts[0];
+        Enemy badGuy = collision.gameObject.GetComponent<Enemy>();
+        if (collision.gameObject.tag == "Enemy")
+        {
+            rb.MovePosition(contact.normal * 500f);
+        }
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Jump();
-    }
+        ProcessInputs();
 
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+    }
+    //Good for physics calculations
     void FixedUpdate()
     {
-        ProcessInputs();
+        Move();
+        Aim();
     }
 
     void ProcessInputs()
     {
-        moveDirection.x = Input.GetAxisRaw("Horizontal") * Time.fixedDeltaTime;
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            sprite.flipX = false;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            sprite.flipX = true;
-        }
-
-        if(rb.velocity.magnitude > maxSpeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
+        moveDirection.x = Input.GetAxisRaw("Horizontal");
+        moveDirection.y = Input.GetAxisRaw("Vertical");
     }
 
     void Move()
     {
-        rb.AddForce(Vector2.right *moveDirection * moveSpeed);
+        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 
-    void Jump()
+    void Aim()
     {
-        if (Input.GetButtonDown("Jump") && grounded.IsGrounded())
-        {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+        Vector2 lookDir = -(mousePos - rb.position);
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        rb.rotation = angle;
     }
+
 }
