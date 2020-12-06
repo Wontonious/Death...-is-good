@@ -9,7 +9,7 @@ public class CameraMove : MonoBehaviour
     void Update()
     {
         position = player.transform.position;
-        position.z = -15f;
+        position.z = -200f;
 
         transform.position = position;
         transform.rotation = Quaternion.identity;

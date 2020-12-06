@@ -11,7 +11,12 @@ public class PlayerV2 : MonoBehaviour
 
     public Camera cam;
 
-
+    private Animator anim;
+    
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         ContactPoint2D contact = collision.contacts[0];
@@ -34,18 +39,38 @@ public class PlayerV2 : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        Aim();
+        //Aim();
     }
 
     void ProcessInputs()
     {
         moveDirection.x = Input.GetAxisRaw("Horizontal");
         moveDirection.y = Input.GetAxisRaw("Vertical");
+        if (moveDirection.x != 0f || moveDirection.y != 0f)
+        {
+            anim.SetBool("isRunning", true);
+            if(moveDirection.x > 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+            if(moveDirection.x < 0)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+            }
+        }
+
+        if (moveDirection == Vector2.zero)
+        {
+            anim.SetBool("isRunning", false);
+            transform.position = new Vector3(rb.position.x, rb.position.y, 0);
+
+        }
     }
 
     void Move()
     {
-        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(new Vector3(rb.position.x + moveDirection.x * moveSpeed * Time.fixedDeltaTime, rb.position.y + moveDirection.y * moveSpeed * Time.fixedDeltaTime, 100f));
+        //rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 
     void Aim()
