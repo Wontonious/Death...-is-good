@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 
     private float timeBtwAttacks;
     public float startTimeBtwAttacks;
+
+    private Animator anim;
     //private Animator anim;
 
     //public GameObject projectile; // For enemies that shoot
@@ -19,7 +21,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         timeBtwAttacks = startTimeBtwAttacks;
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -49,6 +51,21 @@ public class Enemy : MonoBehaviour
                 timeBtwAttacks -= Time.deltaTime;
                 //anim.SetBool("IsAttacking", false);
             }
+        }
+
+        if (Vector2.Distance(transform.position, player.position) < 0)
+        {
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+        }
+        if (Vector2.Distance(transform.position, player.position) > 0)
+        {
+            transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+
+        if (player == null)
+        {
+            anim.SetBool("IsRunning", false);
         }
     }
     public void TakeDamage(int damage)
