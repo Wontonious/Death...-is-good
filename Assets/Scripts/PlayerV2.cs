@@ -2,6 +2,8 @@
 
 public class PlayerV2 : MonoBehaviour
 {
+    public int health = 0;
+
     public float moveSpeed = 5f;
     public float rotationSpeed = 1f;
     public Rigidbody2D rb;
@@ -80,4 +82,18 @@ public class PlayerV2 : MonoBehaviour
         rb.rotation = angle;
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if(health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
 }

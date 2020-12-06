@@ -8,10 +8,13 @@ public class CameraMove : MonoBehaviour
     Vector3 position;
     void Update()
     {
-        position = player.transform.position;
-        position.z = -200f;
+        if (player != null)
+        {
+            position = player.transform.position;
+            position.z = -200f;
 
-        transform.position = position;
-        transform.rotation = Quaternion.identity;
+            transform.position = position;
+            transform.rotation = Quaternion.identity;
+        }
     }
 }
