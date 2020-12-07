@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FirePoint : MonoBehaviour
 {
-    public SpriteRenderer sprite;
     bool occurOnce = false;
+    Vector2 moveDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,18 +15,15 @@ public class FirePoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(sprite.flipX && occurOnce)
+        moveDirection.x = Input.GetAxisRaw("Horizontal");
+        moveDirection.y = Input.GetAxisRaw("Verrtical");
+        if (moveDirection.x < 0)
         {
-            transform.localPosition = new Vector2(-transform.localPosition.x, transform.localPosition.y);
-            occurOnce = false;
-            transform.rotation = Quaternion.Euler(0f, 0f, -90f);
-
+            transform.eulerAngles = new Vector3(0f, 0f, 270f);
         }
-        if (!sprite.flipX && !occurOnce)
+        if (moveDirection.x > 0)
         {
-            transform.localPosition = new Vector2(-transform.localPosition.x, transform.localPosition.y);
-                occurOnce = true;
-            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            transform.eulerAngles = new Vector3(0f, 0f, 90f);
         }
     }
 }

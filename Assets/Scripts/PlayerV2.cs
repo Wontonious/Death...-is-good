@@ -10,7 +10,7 @@ public class PlayerV2 : MonoBehaviour
 
     private Vector2 moveDirection;
     private Vector2 mousePos;
-
+    
     public Camera cam;
 
     private Animator anim;
