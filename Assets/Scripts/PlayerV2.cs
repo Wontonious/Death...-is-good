@@ -14,10 +14,15 @@ public class PlayerV2 : MonoBehaviour
     public Camera cam;
 
     private Animator anim;
-    
+
+    //Invicibility Frames
+    public float invincibilityFrames;
+    private float invincibilityLength;
     void Start()
     {
         anim = GetComponent<Animator>();
+        invincibilityLength = invincibilityFrames;
+        invincibilityFrames = 0f;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -33,9 +38,17 @@ public class PlayerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(invincibilityFrames);
         ProcessInputs();
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        //Invicibility Frames
+        if (invincibilityFrames >= 0)
+        {
+            Debug.Log("Works");
+            invincibilityFrames -= Time.deltaTime;
+        }
     }
     //Good for physics calculations
     void FixedUpdate()
@@ -84,8 +97,12 @@ public class PlayerV2 : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-
+        if (invincibilityFrames <= 0)
+        {
+            health -= damage;
+            invincibilityFrames = invincibilityLength;
+        }
+        
         if(health <= 0)
         {
             Die();

@@ -9,8 +9,8 @@ public class Enemy : MonoBehaviour
     public float retreatDistance;
 
     private bool isAttacking;
-    private float timeBtwAttacks = 0f;
-    public float startTimeBtwAttacks = 4f;
+    private float timeBtwAttacks;
+    public float startTimeBtwAttacks;
     public float attackingDistance = 2f;
 
     private Rigidbody2D rb;
@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        timeBtwAttacks = startTimeBtwAttacks;
     }
 
     void Update()
@@ -59,32 +60,19 @@ public class Enemy : MonoBehaviour
             {
                 transform.eulerAngles = new Vector3(0f, 180f, 0f);
             }
-
-
-            if (Vector2.Distance(transform.position, player.position) < 0)
-            {
-                //transform.eulerAngles = new Vector3(0f, 180f, 0f);
-            }
-            if (Vector2.Distance(transform.position, player.position) > 0)
-            {
-                //transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            }
             
             if (Vector2.Distance(transform.position, player.position) <= attackingDistance && timeBtwAttacks <= 0)
             {
                 //Instantiate(projectile, transform.position, Quaternion.identity); // For enemies with projectiles
                 isAttacking = true;
-                //anim.SetBool("IsAttacking", true);
                 timeBtwAttacks = startTimeBtwAttacks;
             }
-            else
+            else if (timeBtwAttacks <= startTimeBtwAttacks && timeBtwAttacks > 0)
             {
-                Debug.Log(timeBtwAttacks);
                 timeBtwAttacks -= Time.deltaTime;
                 isAttacking = false;
-                //anim.SetBool("IsAttacking", false);
             }
-            
+            //Debug.Log(isAttacking);
         }
 
         void AnimationPlayer()
