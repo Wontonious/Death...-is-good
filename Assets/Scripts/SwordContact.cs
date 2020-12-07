@@ -6,12 +6,12 @@ public class SwordContact : MonoBehaviour
 {
     public int damage = 0;
     public Enemy enemy;
-    private PolygonCollider2D collider;
+    private PolygonCollider2D pCollider;
     private Animator anim;
     void Start()
     {
-        collider = GetComponent<PolygonCollider2D>();
-        collider.enabled = false;
+        pCollider = GetComponent<PolygonCollider2D>();
+        pCollider.enabled = false;
         enemy = gameObject.GetComponentInParent<Enemy>();
         anim = gameObject.GetComponentInParent<Animator>();
     }
@@ -20,13 +20,11 @@ public class SwordContact : MonoBehaviour
     {
         if (enemy.IsAttacking())
         {
-            collider.enabled = true;
-            Debug.Log("YES");
+            pCollider.enabled = true;
         }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            collider.enabled = false;
-            Debug.Log("NO");
+            pCollider.enabled = false;
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
