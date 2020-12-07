@@ -19,10 +19,10 @@ public class AttackObject : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
         }
+    }
 
-        if(gameObject != null)
-        {
-            Destroy(gameObject, 5f);
-        }
+    void Update()
+    {
+        Destroy(gameObject, 5f);
     }
 }
