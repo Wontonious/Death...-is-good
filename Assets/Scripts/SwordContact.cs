@@ -9,8 +9,10 @@ public class SwordContact : MonoBehaviour
     private PolygonCollider2D pCollider;
     private Animator anim;
 
-    public float delay = 1.5f;
-    public float delayOrigin;
+    public float knockbackStrength;
+
+    [SerializeField] private float delay = 1.5f;
+    private float delayOrigin;
     void Start()
     {
         pCollider = GetComponent<PolygonCollider2D>();
@@ -47,6 +49,12 @@ public class SwordContact : MonoBehaviour
         {
             Debug.Log("BAM");
             player.TakeDamage(damage);
+
+            Vector3 direction = collision.transform.position - transform.position;
+
+            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+            rb.AddForce(direction.normalized * knockbackStrength, ForceMode2D.Impulse);
         }
     }
 

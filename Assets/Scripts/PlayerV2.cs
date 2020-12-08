@@ -38,7 +38,6 @@ public class PlayerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(invincibilityFrames);
         ProcessInputs();
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -46,7 +45,6 @@ public class PlayerV2 : MonoBehaviour
         //Invicibility Frames
         if (invincibilityFrames >= 0)
         {
-            Debug.Log("Works");
             invincibilityFrames -= Time.deltaTime;
         }
     }

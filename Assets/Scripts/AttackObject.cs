@@ -15,7 +15,6 @@ public class AttackObject : MonoBehaviour
 
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                Debug.Log("HIT");
                 enemy.TakeDamage(damage);
             }
         }
