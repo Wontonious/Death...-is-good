@@ -24,6 +24,7 @@ public class PlayerV2 : MonoBehaviour
         invincibilityLength = invincibilityFrames;
         invincibilityFrames = 0f;
     }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         ContactPoint2D contact = collision.contacts[0];

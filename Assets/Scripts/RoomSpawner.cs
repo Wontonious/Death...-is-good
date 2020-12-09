@@ -4,23 +4,57 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    public int openingDirection;
-    //1 -> bottom door
-    //2 -> top door
-    //3 -> left door
-    //4 -> right door
+
+    //10 - 15 rooms total
+    //  If room has a certain 
 
     private RoomTemplates templates;
+    private RoomInfo roomInfo;
     private int rand;
     private bool spawned = false;
 
     void Start()
     {
-        templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        templates = gameObject.GetComponentInParent<RoomTemplates>();
+        roomInfo = gameObject.GetComponentInParent<RoomInfo>();
         Invoke("Spawn", 0.1f);
     }
 
 
+
+    void Spawn()
+    {
+        if (roomInfo.BottomDoor())
+        {
+            //Spawn a room with a top door
+            rand = Random.Range(0, templates.topRooms.Length);
+            //if(rand = )
+            Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+        }
+        if (roomInfo.TopDoor())
+        {
+            //spawn a room with a bottom door
+            rand = Random.Range(0, templates.bottomRooms.Length);
+
+            Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation);
+        }
+
+        if (roomInfo.RightDoor())
+        {
+            //spawn a room with left door
+            rand = Random.Range(0, templates.leftRooms.Length);
+
+            Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+        }
+        if (roomInfo.LeftDoor()) { }
+        {
+            //spawn a room with a right door
+            rand = Random.Range(0, templates.rightRooms.Length);
+
+            Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+        }
+    }
+    /*
     void Spawn()
     {
         if (!spawned)
@@ -52,6 +86,8 @@ public class RoomSpawner : MonoBehaviour
             spawned = true;
         }
     }
+    */
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
