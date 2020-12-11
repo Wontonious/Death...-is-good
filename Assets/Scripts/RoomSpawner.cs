@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
@@ -9,49 +7,83 @@ public class RoomSpawner : MonoBehaviour
     //  If room has a certain 
 
     private RoomTemplates templates;
+    //Check what the current room requires
     private RoomInfo roomInfo;
     private int rand;
     private bool spawned = false;
 
     void Start()
     {
-        templates = gameObject.GetComponentInParent<RoomTemplates>();
+        templates = GameObject.FindGameObjectWithTag("RoomTemplate").GetComponent<RoomTemplates>();
         roomInfo = gameObject.GetComponentInParent<RoomInfo>();
-        Invoke("Spawn", 0.1f);
+        Spawn();
     }
 
 
 
     void Spawn()
     {
-        if (roomInfo.BottomDoor())
+        if (gameObject.CompareTag("SpawnpointBottom"))
         {
-            //Spawn a room with a top door
-            rand = Random.Range(0, templates.topRooms.Length);
-            //if(rand = )
-            Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+
+            if (roomInfo.BottomDoor() && !roomInfo.GetDoorBottom())
+            {
+
+                //Checks if the room requires a door at the bottom
+                //Spawn a room with a top door below it
+                rand = Random.Range(0, templates.topRooms.Length);
+                //if(rand = )
+                Debug.Log(rand);
+                Debug.Log(templates.topRooms[rand]);
+                if (rand == 0)
+                {
+                    Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+                    roomInfo.SetDoorBottom();
+                }
+                else if (rand == 2 && templates.topRooms[rand].CompareTag("Sqaure_TBRL_B"))
+                {
+                    Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+                    roomInfo.SetDoorBottom();
+                }
+                else
+                {
+                    Debug.Log("FAILED");
+                }
+            }
         }
-        if (roomInfo.TopDoor())
+        if (gameObject.CompareTag("SpawnpointTop"))
         {
-            //spawn a room with a bottom door
-            rand = Random.Range(0, templates.bottomRooms.Length);
+            if (roomInfo.TopDoor() && !roomInfo.GetDoorTop())
+            {
+                //spawn a room with a bottom door
+                rand = Random.Range(0, templates.bottomRooms.Length);
 
-            Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation);
+                Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation);
+                roomInfo.SetDoorTop();
+            }
         }
 
-        if (roomInfo.RightDoor())
+        if (gameObject.CompareTag("SpawnpointRight"))
         {
-            //spawn a room with left door
-            rand = Random.Range(0, templates.leftRooms.Length);
+            if (roomInfo.RightDoor() && !roomInfo.GetDoorRight())
+            {
+                //spawn a room with left door
+                rand = Random.Range(0, templates.leftRooms.Length);
 
-            Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+                Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+                roomInfo.SetDoorRight();
+            }
         }
-        if (roomInfo.LeftDoor()) { }
+        if (gameObject.CompareTag("SpawnpointLeft"))
         {
-            //spawn a room with a right door
-            rand = Random.Range(0, templates.rightRooms.Length);
+            if (roomInfo.LeftDoor() && !roomInfo.GetDoorLeft()) { }
+            {
+                //spawn a room with a right door
+                rand = Random.Range(0, templates.rightRooms.Length);
 
-            Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+                Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+                roomInfo.SetDoorLeft();
+            }
         }
     }
     /*
@@ -93,6 +125,7 @@ public class RoomSpawner : MonoBehaviour
     {
         if (other.CompareTag("SpawnPoint") && other.GetComponent<RoomSpawner>().spawned == true)
         {
+            Debug.Log("Destroyed");
             Destroy(gameObject);
         }
     }
