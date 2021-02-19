@@ -7,6 +7,11 @@ TagManager:
   - Enemy
   - SpawnPoint
   - Rooms
+  - SpawnpointRight
+  - RoomTemplate
+  - SpawnpointLeft
+  - SpawnpointTop
+  - SpawnpointBottom
   layers:
   - Default
   - TransparentFX
@@ -41,6 +46,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Base
+    uniqueID: 2238490977
+    locked: 0
+  - name: Wall
+    uniqueID: 2493155261
+    locked: 0
+  - name: Edging
+    uniqueID: 4192359381
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
