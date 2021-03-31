@@ -6,7 +6,7 @@ public class AttackObject : MonoBehaviour
 {
     public int damage = 0;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.gameObject.CompareTag("Player"))
         {

@@ -10,11 +10,16 @@ public class PlayerV2 : MonoBehaviour
 
     private Vector2 moveDirection;
     private Vector2 mousePos;
-    
+
+    public bool isMoving = false;
+
     public Camera cam;
 
     private Animator anim;
 
+    public int coins = 0;
+
+    Vector2 lookDir;
     //Invicibility Frames
     public float invincibilityFrames;
     private float invincibilityLength;
@@ -39,6 +44,7 @@ public class PlayerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(lookDir.x);
         ProcessInputs();
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -62,15 +68,18 @@ public class PlayerV2 : MonoBehaviour
         moveDirection.y = Input.GetAxisRaw("Vertical");
         if (moveDirection.x != 0f || moveDirection.y != 0f)
         {
+            isMoving = true;
             anim.SetBool("isRunning", true);
-            if(moveDirection.x > 0)
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-            }
-            if(moveDirection.x < 0)
-            {
-                transform.eulerAngles = new Vector3(0, -180, 0);
-            }
+        }
+
+        lookDir = -(mousePos - rb.position);
+        if (lookDir.x >= 0)
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+        }
+        if (lookDir.x < 0)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
         if (moveDirection == Vector2.zero)
@@ -78,6 +87,10 @@ public class PlayerV2 : MonoBehaviour
             anim.SetBool("isRunning", false);
             transform.position = new Vector3(rb.position.x, rb.position.y, 0);
 
+        }
+        if(moveDirection.x == 0f && moveDirection.y == 0f)
+        {
+            isMoving = false;
         }
     }
 
@@ -89,7 +102,7 @@ public class PlayerV2 : MonoBehaviour
 
     void Aim()
     {
-        Vector2 lookDir = -(mousePos - rb.position);
+        lookDir = -(mousePos - rb.position);
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
     }
@@ -111,5 +124,15 @@ public class PlayerV2 : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+    }
+
+    public bool GetMovement()
+    {
+        return isMoving;
+    }
+
+    public void AddCoin()
+    {
+        coins++;
     }
 }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomCheck : MonoBehaviour
+public class RoomChecker : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("SpawnPoint"))
         {
-            //Destroy(gameObject.transform.parent.gameObject);
+            //Destroy(other.transform.parent.gameObject);
         }
     }
 }
+

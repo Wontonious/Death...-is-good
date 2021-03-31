@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class RoomSpawner : MonoBehaviour
+public class Starter_Room_Spawner : MonoBehaviour
 {
 
     //10 - 15 rooms total
@@ -11,7 +11,7 @@ public class RoomSpawner : MonoBehaviour
     private RoomInfo roomInfo;
     private RoomInfo otherInfo;
     private int rand;
-    private bool spawned = false;
+    public bool spawned = false;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class RoomSpawner : MonoBehaviour
         roomInfo = gameObject.GetComponentInParent<RoomInfo>();
         Invoke("Spawn", 0.1f);
     }
-    
+
 
 
     void Spawn()
@@ -49,6 +49,7 @@ public class RoomSpawner : MonoBehaviour
                 Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
             }
             spawned = true;
+            Destroy(gameObject);
         }
     }
 
