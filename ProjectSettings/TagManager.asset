@@ -12,6 +12,7 @@ TagManager:
   - SpawnpointLeft
   - SpawnpointTop
   - SpawnpointBottom
+  - Wisp
   layers:
   - Default
   - TransparentFX

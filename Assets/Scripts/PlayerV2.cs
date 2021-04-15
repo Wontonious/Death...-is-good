@@ -135,4 +135,9 @@ public class PlayerV2 : MonoBehaviour
     {
         coins++;
     }
+
+    public int WispCount()
+    {
+        return coins;
+    }
 }

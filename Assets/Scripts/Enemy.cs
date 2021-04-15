@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    public GameObject wisp; //Wisp enemy drops
+
     //public GameObject projectile; // For enemies that shoot
     public Transform player;
 
@@ -126,6 +128,7 @@ public void TakeDamage(int damage)
     void Die()
     {
         Destroy(gameObject);
+        Instantiate(wisp, transform.position, Quaternion.identity);
     }
 
     public bool IsAttacking()
