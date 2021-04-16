@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2515307196791906888}
   - component: {fileID: 7567951425150365479}
   - component: {fileID: 3703609318139633540}
+  - component: {fileID: 7480355028073557440}
   m_Layer: 0
   m_Name: Spawnpoint_L
-  m_TagString: SpawnpointLeft
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b592e0710c291984ea8df95c078e584c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  openingDirection: 4
 --- !u!61 &3703609318139633540
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -70,6 +73,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &7480355028073557440
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169572724151792749}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &696084927941554934
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,10 +105,10 @@ GameObject:
   - component: {fileID: 1864242417891585286}
   - component: {fileID: 3283622353684591038}
   - component: {fileID: 6031876202651921092}
-  - component: {fileID: 7516149624099291900}
+  - component: {fileID: 8227830737418017256}
   m_Layer: 0
   m_Name: Spawnpoint_R
-  m_TagString: SpawnpointRight
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b592e0710c291984ea8df95c078e584c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  openingDirection: 1
 --- !u!61 &6031876202651921092
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141,32 +167,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!61 &7516149624099291900
-BoxCollider2D:
+--- !u!50 &8227830737418017256
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696084927941554934}
-  m_Enabled: 1
-  m_Density: 1
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3283622355044447111
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +198,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3283622355044447108}
   - component: {fileID: 3283622355044447109}
-  - component: {fileID: 6309944165829117067}
   - component: {fileID: 8835681828273244822}
   m_Layer: 0
   m_Name: SpawnPoint
@@ -226,18 +246,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6309944165829117067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3283622355044447111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f111c059a43634a4d9d7786b121565f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &8835681828273244822
 Rigidbody2D:
   serializedVersion: 4
@@ -270,6 +278,7 @@ GameObject:
   - component: {fileID: 3482664033380375610}
   - component: {fileID: 3482664033380375611}
   - component: {fileID: 8436773140903423436}
+  - component: {fileID: 7463271108592422782}
   m_Layer: 0
   m_Name: Room_LR
   m_TagString: Untagged
@@ -325,6 +334,18 @@ MonoBehaviour:
   bottomDoor: 0
   rightDoor: 1
   leftDoor: 1
+--- !u!114 &7463271108592422782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3482664033380375612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36610989181c0a4c889d4bb159e9d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3482664033660739320
 GameObject:
   m_ObjectHideFlags: 0

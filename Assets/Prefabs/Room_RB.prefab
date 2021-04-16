@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 827692603982348942}
   - component: {fileID: 827692603982348943}
   - component: {fileID: 6473509413387231549}
+  - component: {fileID: 2351102398256258301}
   m_Layer: 0
   m_Name: Spawnpoint_B
-  m_TagString: SpawnpointBottom
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b592e0710c291984ea8df95c078e584c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  openingDirection: 2
 --- !u!61 &6473509413387231549
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -70,6 +73,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &2351102398256258301
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827692603982348937}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &827692604375967618
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 827692604375967617}
   - component: {fileID: 827692604375967616}
-  - component: {fileID: 2380749688242147577}
   - component: {fileID: 4598692652837650142}
   m_Layer: 0
   m_Name: SpawnPoint
@@ -129,18 +152,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2380749688242147577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827692604375967618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f111c059a43634a4d9d7786b121565f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &4598692652837650142
 Rigidbody2D:
   serializedVersion: 4
@@ -173,6 +184,7 @@ GameObject:
   - component: {fileID: 1637519534226278463}
   - component: {fileID: 1637519534226278462}
   - component: {fileID: 6050651328682817993}
+  - component: {fileID: 8674258147142229189}
   m_Layer: 0
   m_Name: Room_RB
   m_TagString: Untagged
@@ -228,6 +240,18 @@ MonoBehaviour:
   bottomDoor: 1
   rightDoor: 1
   leftDoor: 0
+--- !u!114 &8674258147142229189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637519534226278457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36610989181c0a4c889d4bb159e9d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1637519534482524925
 GameObject:
   m_ObjectHideFlags: 0
@@ -5049,9 +5073,10 @@ GameObject:
   - component: {fileID: 4553796394982062339}
   - component: {fileID: 827692603991287227}
   - component: {fileID: 835420543850670334}
+  - component: {fileID: 5033643814787669453}
   m_Layer: 0
   m_Name: Spawnpoint_R
-  m_TagString: SpawnpointRight
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5082,6 +5107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b592e0710c291984ea8df95c078e584c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  openingDirection: 1
 --- !u!61 &835420543850670334
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5108,3 +5135,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &5033643814787669453
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3406329519077664499}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

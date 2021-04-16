@@ -11,10 +11,21 @@ public class RoomSpawner : MonoBehaviour
     private RoomInfo roomInfo;
     private RoomInfo otherInfo;
     private int rand;
-    private bool spawned = false;
+    public bool spawned = false;
+
+    public int openingDirection;
+    //1 = Right
+    //2 = Bottom
+    //3 = Top
+    //4 = Left
+
+    private RoomSpawner roomSpawner;
+
+    public float waitTime = 4f;
 
     void Start()
     {
+        Destroy(gameObject, waitTime);
         templates = GameObject.FindGameObjectWithTag("RoomTemplate").GetComponent<RoomTemplates>();
         roomInfo = gameObject.GetComponentInParent<RoomInfo>();
         Invoke("Spawn", 0.1f);
@@ -26,24 +37,24 @@ public class RoomSpawner : MonoBehaviour
     {
         if (spawned == false)
         {
-            if (gameObject.CompareTag("SpawnpointRight"))
+            if (openingDirection == 1)
             {
                 rand = Random.Range(0, templates.leftRooms.Length);
                 Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
             }
 
-            if (gameObject.CompareTag("SpawnpointBottom"))
+            if (openingDirection == 2)
             {
                 rand = Random.Range(0, templates.topRooms.Length);
                 Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
             }
-            if (gameObject.CompareTag("SpawnpointTop"))
+            if (openingDirection == 3)
             {
                 rand = Random.Range(0, templates.bottomRooms.Length);
                 Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation);
             }
 
-            if (gameObject.CompareTag("SpawnpointLeft"))
+            if (openingDirection == 4)
             {
                 rand = Random.Range(0, templates.leftRooms.Length);
                 Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
@@ -56,7 +67,15 @@ public class RoomSpawner : MonoBehaviour
     {
         if (other.CompareTag("SpawnPoint"))
         {
-            Destroy(gameObject);
+            roomSpawner = other.gameObject.GetComponent<RoomSpawner>();
+            if(roomSpawner.spawned == false && spawned == false)
+            {
+                //Spawn walls blocking off any openings
+                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            spawned = true;
         }
+        
     }
 }

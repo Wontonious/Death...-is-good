@@ -44,7 +44,6 @@ public class PlayerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(lookDir.x);
         ProcessInputs();
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);

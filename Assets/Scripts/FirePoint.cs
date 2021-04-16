@@ -14,7 +14,6 @@ public class FirePoint : MonoBehaviour
     void Update()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(mousePos);
     }
 
     void FixedUpdate()

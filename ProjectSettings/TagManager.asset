@@ -7,12 +7,9 @@ TagManager:
   - Enemy
   - SpawnPoint
   - Rooms
-  - SpawnpointRight
   - RoomTemplate
-  - SpawnpointLeft
-  - SpawnpointTop
-  - SpawnpointBottom
   - Wisp
+  - ClosedRoom
   layers:
   - Default
   - TransparentFX
